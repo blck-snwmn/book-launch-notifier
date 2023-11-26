@@ -144,40 +144,8 @@ async function notifyNewBook(env: Env) {
 		console.info("no new items");
 		return;
 	}
-
-
-	const blocks = [];
-	for (const item of newItems) {
-		blocks.push({
-			type: "section",
-			text: {
-				type: "mrkdwn",
-				text: `*${item.title}*\n${item.link}`,
-			},
-		});
-	}
-	if (blocks.length === 0) {
-		return;
-	}
-	await env.SLACK_NOTIFIER.send({
-		type: "chat.postMessage",
-		body: {
-			channel: env.CHANNEL,
-			blocks: [
-				{
-					type: "header",
-					text: {
-						type: "plain_text",
-						text: "New Books",
-					},
-				},
-				{
-					type: "divider",
-				},
-				...blocks,
-			],
-		},
-	});
+	const msg = createMessage(env.CHANNEL, "New Books", newItems);
+	await env.SLACK_NOTIFIER.send(msg);
 }
 
 
@@ -192,9 +160,13 @@ async function notifySoonBook(env: Env) {
 		console.info("no new items");
 		return;
 	}
+	const msg = createMessage(env.CHANNEL, "Soon Books", newItems.items);
+	await env.SLACK_NOTIFIER.send(msg);
+}
 
+function createMessage(channel: string, title: string, items: XMLItem[]) {
 	const blocks = [];
-	for (const item of newItems.items) {
+	for (const item of items) {
 		blocks.push({
 			type: "section",
 			text: {
@@ -203,19 +175,16 @@ async function notifySoonBook(env: Env) {
 			},
 		});
 	}
-	if (blocks.length === 0) {
-		return;
-	}
-	await env.SLACK_NOTIFIER.send({
+	return {
 		type: "chat.postMessage",
 		body: {
-			channel: env.CHANNEL,
+			channel: channel,
 			blocks: [
 				{
 					type: "header",
 					text: {
 						type: "plain_text",
-						text: "Soon Books",
+						text: title,
 					},
 				},
 				{
@@ -224,5 +193,5 @@ async function notifySoonBook(env: Env) {
 				...blocks,
 			],
 		},
-	});
+	}
 }
