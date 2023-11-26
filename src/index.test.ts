@@ -6,7 +6,7 @@ describe("createMessage", () => {
         const inputXMLItems = [
             {
                 title: "title1",
-                date: "date1",
+                date: "2023-09-20T00:00:00+09:00",
                 link: "link1",
                 expiration: 1,
             },
@@ -31,7 +31,7 @@ describe("createMessage", () => {
                         type: "section",
                         text: {
                             type: "mrkdwn",
-                            text: "*title1*\nlink1",
+                            text: "*title1*\n2023/9/20\nlink1",
                         },
                     }
                 ],

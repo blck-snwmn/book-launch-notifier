@@ -184,11 +184,13 @@ async function notifySoonBook(env: Env) {
 export function createMessage(channel: string, title: string, items: XMLItem[]) {
 	const blocks = [];
 	for (const item of items) {
+		const date = new Date(item.date);
+		const dateStr = date.toLocaleDateString("ja-JP")
 		blocks.push({
 			type: "section",
 			text: {
 				type: "mrkdwn",
-				text: `*${item.title}*\n${item.link}`,
+				text: `*${item.title}*\n${dateStr}\n${item.link}`,
 			},
 		});
 	}
