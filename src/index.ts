@@ -16,7 +16,7 @@ type XMLItem = {
 	title: string;
 	date: string;
 	link: string;
-	expiration: number
+	expiration: number;
 };
 
 type Result = {
@@ -38,7 +38,7 @@ app.post("/items", async (c) => {
 		removeNSPrefix: true,
 	});
 	const json: XMLContemt = parser.parse(text);
-	const items: XMLItem[] = json.RDF.item.map(i => {
+	const items: XMLItem[] = json.RDF.item.map((i) => {
 		const date = new Date(i.date);
 		date.setDate(date.getDate() + 1);
 		const expiration = Math.floor(date.getTime() / 1000);
@@ -48,7 +48,7 @@ app.post("/items", async (c) => {
 			title: i.title,
 			date: i.date,
 			link: link,
-			expiration
+			expiration,
 		};
 	});
 
@@ -78,7 +78,7 @@ app.post("/items", async (c) => {
 		unsavedItems.push(item);
 	}
 	return new Response(JSON.stringify(unsavedItems));
-})
+});
 
 app.get("/items", async (c) => {
 	const offsetStr = c.req.query("offset") ?? "1";
@@ -89,17 +89,31 @@ app.get("/items", async (c) => {
 	const now = new Date();
 
 	// hh:mm:ss -> 00:00:00
-	const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+	const startDate = new Date(
+		now.getFullYear(),
+		now.getMonth(),
+		now.getDate(),
+		0,
+		0,
+		0,
+	);
 	startDate.setDate(startDate.getDate() + offset);
 	// after 1 day
-	const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 1, 0, 0, 0);
+	const endDate = new Date(
+		startDate.getFullYear(),
+		startDate.getMonth(),
+		startDate.getDate() + 1,
+		0,
+		0,
+		0,
+	);
 	console.info(startDate.toISOString(), endDate.toISOString());
 
 	const start = Math.floor(startDate.getTime() / 1000);
 	const end = Math.floor(endDate.getTime() / 1000);
 
 	const items: XMLItem[] = [];
-	for (const key of (await c.env.BOOK_LAUNCH.list()).keys.map(i => i.name)) {
+	for (const key of (await c.env.BOOK_LAUNCH.list()).keys.map((i) => i.name)) {
 		const item = await c.env.BOOK_LAUNCH.get<XMLItem>(key, "json");
 		if (!item) {
 			// ignore if not found
@@ -112,18 +126,20 @@ app.get("/items", async (c) => {
 			items.push(item);
 		}
 	}
-	return new Response(JSON.stringify({
-		start: startDate.toISOString(),
-		end: endDate.toISOString(),
-		items
-	} as Result));
-})
+	return new Response(
+		JSON.stringify({
+			start: startDate.toISOString(),
+			end: endDate.toISOString(),
+			items,
+		} as Result),
+	);
+});
 
 type Env = {
-	CHANNEL: string
-	FETCHER: Fetcher
-	SLACK_NOTIFIER: Queue
-}
+	CHANNEL: string;
+	FETCHER: Fetcher;
+	SLACK_NOTIFIER: Queue;
+};
 
 export default {
 	...app,
@@ -131,15 +147,17 @@ export default {
 		await notifyNewBook(env);
 		await notifySoonBook(env);
 	},
-}
+};
 
 async function notifyNewBook(env: Env) {
-	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items", { method: "POST" });
+	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items", {
+		method: "POST",
+	});
 	if (!newItemsResp.ok) {
 		console.error("failed to post items", newItemsResp.status);
 		return;
 	}
-	const newItems: XMLItem[] = await newItemsResp.json() as XMLItem[];
+	const newItems: XMLItem[] = (await newItemsResp.json()) as XMLItem[];
 	if (newItems.length === 0) {
 		console.info("no new items");
 		return;
@@ -148,14 +166,13 @@ async function notifyNewBook(env: Env) {
 	await env.SLACK_NOTIFIER.send(msg);
 }
 
-
 async function notifySoonBook(env: Env) {
 	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items");
 	if (!newItemsResp.ok) {
 		console.error("failed to post items", newItemsResp.status);
 		return;
 	}
-	const newItems: Result = await newItemsResp.json() as Result;
+	const newItems: Result = (await newItemsResp.json()) as Result;
 	if (newItems.items.length === 0) {
 		console.info("no new items");
 		return;
@@ -193,5 +210,5 @@ function createMessage(channel: string, title: string, items: XMLItem[]) {
 				...blocks,
 			],
 		},
-	}
+	};
 }
