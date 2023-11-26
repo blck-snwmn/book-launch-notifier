@@ -5,7 +5,7 @@ compatibility_date = "2023-11-21"
 workers_dev = false
 
 kv_namespaces = [
-    { binding = "BOOK_LAUNCH", id = "57a4dbb0fb9743278f17fc378f24759d" }
+    { binding = "BOOK_LAUNCH", id = "6c6c2407e70d40c3946e67bea876d22a" }
 ]
 
 tail_consumers = [
