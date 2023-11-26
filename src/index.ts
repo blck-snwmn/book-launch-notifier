@@ -147,6 +147,9 @@ async function notifyNewBook(env: Env) {
 			},
 		});
 	}
+	if (blocks.length === 0) {
+		return;
+	}
 	await env.SLACK_NOTIFIER.send({
 		type: "chat.postMessage",
 		body: {
