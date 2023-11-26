@@ -19,3 +19,6 @@ services = [
 [[queues.producers]]
 queue = "slackqueue"
 binding = "SLACK_NOTIFIER"
+
+[triggers]
+crons = [ "0 15 * * *"]
