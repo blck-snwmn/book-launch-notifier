@@ -181,7 +181,7 @@ async function notifySoonBook(env: Env) {
 	await env.SLACK_NOTIFIER.send(msg);
 }
 
-function createMessage(channel: string, title: string, items: XMLItem[]) {
+export function createMessage(channel: string, title: string, items: XMLItem[]) {
 	const blocks = [];
 	for (const item of items) {
 		blocks.push({
