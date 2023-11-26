@@ -11,3 +11,11 @@ kv_namespaces = [
 tail_consumers = [
   {service = "cf-tail-logger"},
 ]
+
+services = [
+  { binding = "FETCHER", service = "book-launch-notifier"}
+]
+
+[[queues.producers]]
+queue = "slackqueue"
+binding = "SLACK_NOTIFIER"

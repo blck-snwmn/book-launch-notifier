@@ -111,13 +111,53 @@ app.get("/items", async (c) => {
 	} as Result));
 })
 
-const scheduled = {
-	async scheduled(controller: ScheduledController, env: Bindings): Promise<void> {
-	},
-};
-
+type Env = {
+	CHANNEL: string
+	FETCHER: Fetcher
+	SLACK_NOTIFIER: Queue
+}
 
 export default {
 	...app,
-	...scheduled,
+	async scheduled(controller: ScheduledController, env: Env): Promise<void> {
+		await notifyNewBook(env);
+	},
+}
+
+async function notifyNewBook(env: Env) {
+	const newItemsResp = await env.FETCHER.fetch("/items", { method: "POST" });
+	if (!newItemsResp.ok) {
+		console.error("failed to post items", newItemsResp.status);
+		return;
+	}
+	const newItemData: Result = await newItemsResp.json()
+	const blocks = [];
+	for (const item of newItemData.items) {
+		blocks.push({
+			type: "section",
+			text: {
+				type: "mrkdwn",
+				text: `*${item.title}*\n${item.link}`,
+			},
+		});
+	}
+	await env.SLACK_NOTIFIER.send({
+		type: "chat.postMessage",
+		body: {
+			channel: env.CHANNEL,
+			blocks: [
+				{
+					type: "header",
+					text: {
+						type: "plain_text",
+						text: "New Books",
+					},
+				},
+				{
+					type: "divider",
+				},
+				...blocks,
+			],
+		},
+	});
 }
