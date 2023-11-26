@@ -64,6 +64,12 @@ app.post("/items", async (c) => {
 			// ignore if already saved
 			continue;
 		}
+		const now = new Date();
+		if (item.expiration < Math.floor(now.getTime() / 1000)) {
+			// ignore if expired
+			continue;
+		}
+
 		await c.env.BOOK_LAUNCH.put(key, JSON.stringify(item), {
 			expiration: item.expiration,
 		});
