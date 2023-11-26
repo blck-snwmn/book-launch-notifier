@@ -58,7 +58,9 @@ app.post("/items", async (c) => {
 			// ignore if already saved
 			continue;
 		}
-		await c.env.BOOK_LAUNCH.put(key, JSON.stringify(item), {});
+		await c.env.BOOK_LAUNCH.put(key, JSON.stringify(item), {
+			expiration: item.expiration,
+		});
 		unsavedItems.push(item);
 	}
 	return new Response(JSON.stringify(unsavedItems));
