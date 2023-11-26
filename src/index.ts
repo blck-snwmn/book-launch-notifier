@@ -19,6 +19,12 @@ type XMLItem = {
 	expiration: number
 };
 
+type Result = {
+	start: string;
+	end: string;
+	items: XMLItem[];
+};
+
 const app = new Hono<{ Bindings: Bindings }>();
 
 app.post("/items", async (c) => {
@@ -64,6 +70,45 @@ app.post("/items", async (c) => {
 		unsavedItems.push(item);
 	}
 	return new Response(JSON.stringify(unsavedItems));
+})
+
+app.get("/items", async (c) => {
+	const offsetStr = c.req.query("offset") ?? "1";
+	const offset = parseInt(offsetStr, 10);
+	if (isNaN(offset)) {
+		return new Response("offset is not number", { status: 400 });
+	}
+	const now = new Date();
+
+	// hh:mm:ss -> 00:00:00
+	const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
+	startDate.setDate(startDate.getDate() + offset);
+	// after 1 day
+	const endDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate() + 1, 0, 0, 0);
+	console.info(startDate.toISOString(), endDate.toISOString());
+
+	const start = Math.floor(startDate.getTime() / 1000);
+	const end = Math.floor(endDate.getTime() / 1000);
+
+	const items: XMLItem[] = [];
+	for (const key of (await c.env.BOOK_LAUNCH.list()).keys.map(i => i.name)) {
+		const item = await c.env.BOOK_LAUNCH.get<XMLItem>(key, "json");
+		if (!item) {
+			// ignore if not found
+			continue;
+		}
+		const unix = Math.floor(new Date(item.date).getTime() / 1000);
+
+		// start <= item.expiration < end -> response
+		if (start <= unix && unix < end) {
+			items.push(item);
+		}
+	}
+	return new Response(JSON.stringify({
+		start: startDate.toISOString(),
+		end: endDate.toISOString(),
+		items
+	} as Result));
 })
 
 const scheduled = {
