@@ -139,6 +139,12 @@ async function notifyNewBook(env: Env) {
 		return;
 	}
 	const newItems: XMLItem[] = await newItemsResp.json()
+	if (newItems.length === 0) {
+		console.info("no new items");
+		return;
+	}
+
+
 	const blocks = [];
 	for (const item of newItems) {
 		blocks.push({
