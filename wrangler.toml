@@ -7,3 +7,7 @@ workers_dev = false
 kv_namespaces = [
     { binding = "BOOK_LAUNCH", id = "57a4dbb0fb9743278f17fc378f24759d" }
 ]
+
+tail_consumers = [
+  {service = "cf-tail-logger"},
+]
