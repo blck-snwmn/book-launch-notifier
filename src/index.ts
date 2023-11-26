@@ -52,7 +52,7 @@ app.post("/items", async (c) => {
 		};
 	});
 
-	const keys = (await c.env.BOOK_LAUNCH.list()).keys.reduce((acc, i) => {
+	const existKeys = (await c.env.BOOK_LAUNCH.list()).keys.reduce((acc, i) => {
 		acc[i.name] = true;
 		return acc;
 	}, {} as Record<string, boolean>);
@@ -62,7 +62,7 @@ app.post("/items", async (c) => {
 	for (const item of items) {
 		const url = new URL(item.link);
 		const key = url.pathname;
-		if (keys[key]) {
+		if (existKeys[key]) {
 			// ignore if already saved
 			continue;
 		}
