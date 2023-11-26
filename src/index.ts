@@ -42,10 +42,12 @@ app.post("/items", async (c) => {
 		const date = new Date(i.date);
 		date.setDate(date.getDate() + 1);
 		const expiration = Math.floor(date.getTime() / 1000);
+		const url = new URL(i.link);
+		const link = `${url.origin}${url.pathname}`;
 		return {
 			title: i.title,
 			date: i.date,
-			link: i.link,
+			link: link,
 			expiration
 		};
 	});
