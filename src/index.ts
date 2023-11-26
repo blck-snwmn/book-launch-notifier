@@ -129,6 +129,7 @@ export default {
 	...app,
 	async scheduled(controller: ScheduledController, env: Env): Promise<void> {
 		await notifyNewBook(env);
+		await notifySoonBook(env);
 	},
 }
 
@@ -168,6 +169,53 @@ async function notifyNewBook(env: Env) {
 					text: {
 						type: "plain_text",
 						text: "New Books",
+					},
+				},
+				{
+					type: "divider",
+				},
+				...blocks,
+			],
+		},
+	});
+}
+
+
+async function notifySoonBook(env: Env) {
+	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items");
+	if (!newItemsResp.ok) {
+		console.error("failed to post items", newItemsResp.status);
+		return;
+	}
+	const newItems: Result = await newItemsResp.json()
+	if (newItems.items.length === 0) {
+		console.info("no new items");
+		return;
+	}
+
+	const blocks = [];
+	for (const item of newItems.items) {
+		blocks.push({
+			type: "section",
+			text: {
+				type: "mrkdwn",
+				text: `*${item.title}*\n${item.link}`,
+			},
+		});
+	}
+	if (blocks.length === 0) {
+		return;
+	}
+	await env.SLACK_NOTIFIER.send({
+		type: "chat.postMessage",
+		body: {
+			channel: env.CHANNEL,
+			blocks: [
+				{
+					type: "header",
+					text: {
+						type: "plain_text",
+						text: "Soon Books",
 					},
 				},
 				{
