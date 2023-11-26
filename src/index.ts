@@ -136,9 +136,9 @@ async function notifyNewBook(env: Env) {
 		console.error("failed to post items", newItemsResp.status);
 		return;
 	}
-	const newItemData: Result = await newItemsResp.json()
+	const newItems: XMLItem[] = await newItemsResp.json()
 	const blocks = [];
-	for (const item of newItemData.items) {
+	for (const item of newItems) {
 		blocks.push({
 			type: "section",
 			text: {
