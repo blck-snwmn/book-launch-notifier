@@ -181,11 +181,17 @@ async function notifySoonBook(env: Env) {
 	await env.SLACK_NOTIFIER.send(msg);
 }
 
-export function createMessage(channel: string, title: string, items: XMLItem[]) {
+export function createMessage(
+	channel: string,
+	title: string,
+	items: XMLItem[],
+) {
 	const blocks = [];
 	for (const item of items) {
 		const date = new Date(item.date);
-		const dateStr = date.toLocaleDateString("ja-JP")
+		const dateStr = date.toLocaleDateString("ja-JP", {
+			timeZone: "Asia/Tokyo",
+		});
 		blocks.push({
 			type: "section",
 			text: {
