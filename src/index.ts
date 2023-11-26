@@ -139,7 +139,7 @@ async function notifyNewBook(env: Env) {
 		console.error("failed to post items", newItemsResp.status);
 		return;
 	}
-	const newItems: XMLItem[] = await newItemsResp.json()
+	const newItems: XMLItem[] = await newItemsResp.json() as XMLItem[];
 	if (newItems.length === 0) {
 		console.info("no new items");
 		return;
@@ -155,7 +155,7 @@ async function notifySoonBook(env: Env) {
 		console.error("failed to post items", newItemsResp.status);
 		return;
 	}
-	const newItems: Result = await newItemsResp.json()
+	const newItems: Result = await newItemsResp.json() as Result;
 	if (newItems.items.length === 0) {
 		console.info("no new items");
 		return;
