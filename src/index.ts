@@ -125,7 +125,7 @@ export default {
 }
 
 async function notifyNewBook(env: Env) {
-	const newItemsResp = await env.FETCHER.fetch("/items", { method: "POST" });
+	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items", { method: "POST" });
 	if (!newItemsResp.ok) {
 		console.error("failed to post items", newItemsResp.status);
 		return;
