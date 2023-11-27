@@ -22,3 +22,7 @@ binding = "SLACK_NOTIFIER"
 
 [triggers]
 crons = [ "0 15 * * *"]
+
+[[queues.producers]]
+queue = "discordqueue"
+binding = "DQUEUE"

@@ -139,6 +139,7 @@ type Env = {
 	CHANNEL: string;
 	FETCHER: Fetcher;
 	SLACK_NOTIFIER: Queue;
+	DQUEUE: Queue;
 };
 
 export default {
@@ -164,6 +165,9 @@ async function notifyNewBook(env: Env) {
 	}
 	const msg = createSlackMessage(env.CHANNEL, "New Books", newItems);
 	await env.SLACK_NOTIFIER.send(msg);
+
+	const discordMsg = createDiscordMessage("New Books", newItems);
+	await env.DQUEUE.send(discordMsg);
 }
 
 async function notifySoonBook(env: Env) {
@@ -179,6 +183,9 @@ async function notifySoonBook(env: Env) {
 	}
 	const msg = createSlackMessage(env.CHANNEL, "Soon Books", newItems.items);
 	await env.SLACK_NOTIFIER.send(msg);
+
+	const discordMsg = createDiscordMessage("Soon Books", newItems.items);
+	await env.DQUEUE.send(discordMsg);
 }
 
 export function createSlackMessage(
@@ -218,5 +225,20 @@ export function createSlackMessage(
 				...blocks,
 			],
 		},
+	};
+}
+
+export function createDiscordMessage(title: string, items: XMLItem[]) {
+	let message = `${title}\n`;
+	for (const item of items) {
+		const date = new Date(item.date);
+		const dateStr = date.toLocaleDateString("ja-JP", {
+			timeZone: "Asia/Tokyo",
+		});
+		message += `*${item.title}*\n${dateStr}\n${item.link}\n`;
+	}
+	return {
+		type: "send_message",
+		message: message,
 	};
 }
