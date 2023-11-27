@@ -81,7 +81,7 @@ app.post("/items", async (c) => {
 });
 
 app.get("/items", async (c) => {
-	const offsetStr = c.req.query("offset") ?? "1";
+	const offsetStr = c.req.query("offset") ?? "0";
 	const offset = parseInt(offsetStr, 10);
 	if (Number.isNaN(offset)) {
 		return new Response("offset is not number", { status: 400 });
