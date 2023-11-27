@@ -176,15 +176,15 @@ async function notifySoonBook(env: Env) {
 		console.error("failed to post items", newItemsResp.status);
 		return;
 	}
-	const newItems: Result = (await newItemsResp.json()) as Result;
-	if (newItems.items.length === 0) {
+	const soonItems: Result = (await newItemsResp.json()) as Result;
+	if (soonItems.items.length === 0) {
 		console.info("no soon items");
 		return;
 	}
-	const msg = createSlackMessage(env.CHANNEL, "Soon Books", newItems.items);
+	const msg = createSlackMessage(env.CHANNEL, "Soon Books", soonItems.items);
 	await env.SLACK_NOTIFIER.send(msg);
 
-	const discordMsg = createDiscordMessage("Soon Books", newItems.items);
+	const discordMsg = createDiscordMessage("Soon Books", soonItems.items);
 	await env.DQUEUE.send(discordMsg);
 }
 
