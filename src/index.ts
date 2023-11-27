@@ -243,6 +243,8 @@ export function createDiscordMessage(title: string, items: XMLItem[]) {
 	}
 	return {
 		type: "send_message",
-		message: message,
+		message: {
+			content: message,
+		},
 	};
 }
