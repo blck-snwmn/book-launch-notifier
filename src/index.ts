@@ -233,13 +233,13 @@ export function createSlackMessage(
 }
 
 export function createDiscordMessage(title: string, items: XMLItem[]) {
-	let message = `${title}\n`;
+	let message = `# ${title}\n`;
 	for (const item of items) {
 		const date = new Date(item.date);
 		const dateStr = date.toLocaleDateString("ja-JP", {
 			timeZone: "Asia/Tokyo",
 		});
-		message += `*${item.title}*\n${dateStr}\n${item.link}\n`;
+		message += `## ${item.title}\n${dateStr}\n${item.link}\n`;
 	}
 	return {
 		type: "send_message",
