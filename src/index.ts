@@ -178,7 +178,7 @@ async function notifySoonBook(env: Env) {
 	}
 	const newItems: Result = (await newItemsResp.json()) as Result;
 	if (newItems.items.length === 0) {
-		console.info("no new items");
+		console.info("no soon items");
 		return;
 	}
 	const msg = createSlackMessage(env.CHANNEL, "Soon Books", newItems.items);
