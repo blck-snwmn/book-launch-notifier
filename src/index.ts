@@ -163,6 +163,8 @@ async function notifyNewBook(env: Env) {
 		console.info("no new items");
 		return;
 	}
+	console.info(`new items: ${newItems.length}`);
+
 	const msg = createSlackMessage(env.CHANNEL, "New Books", newItems);
 	await env.SLACK_NOTIFIER.send(msg);
 
@@ -181,6 +183,8 @@ async function notifySoonBook(env: Env) {
 		console.info("no soon items");
 		return;
 	}
+	console.info(`soon items: ${soonItems.items.length}`);
+
 	const msg = createSlackMessage(env.CHANNEL, "Soon Books", soonItems.items);
 	await env.SLACK_NOTIFIER.send(msg);
 
