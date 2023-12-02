@@ -52,10 +52,13 @@ app.post("/items", async (c) => {
 		};
 	});
 
-	const existKeys = (await c.env.BOOK_LAUNCH.list()).keys.reduce((acc, i) => {
-		acc[i.name] = true;
-		return acc;
-	}, {} as Record<string, boolean>);
+	const existKeys = (await c.env.BOOK_LAUNCH.list()).keys.reduce(
+		(acc, i) => {
+			acc[i.name] = true;
+			return acc;
+		},
+		{} as Record<string, boolean>,
+	);
 
 	const unsavedItems: XMLItem[] = [];
 
