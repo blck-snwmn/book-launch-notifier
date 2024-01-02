@@ -9,13 +9,13 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.4.1",
-		"@cloudflare/workers-types": "^4.20230419.0",
-		"typescript": "^5.0.4",
-		"vitest": "^0.34.6",
-		"wrangler": "^3.18.0"
+		"@cloudflare/workers-types": "^4.20231218.0",
+		"typescript": "^5.3.3",
+		"vitest": "^1.1.1",
+		"wrangler": "^3.22.1"
 	},
 	"dependencies": {
 		"fast-xml-parser": "^4.3.2",
-		"hono": "^3.11.7"
+		"hono": "^3.11.11"
 	}
 }
