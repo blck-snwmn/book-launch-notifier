@@ -2,7 +2,7 @@ on:
   push:
 
 jobs:
-  lint:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -10,21 +10,9 @@ jobs:
         with:
           version: 8
           run_install: true
-      - name: lint
+      - name: ci
         run: |
-          pnpm biome lint .
-  
-  format:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
-          run_install: true
-      - name: lint
-        run: |
-          pnpm biome format .
+          pnpm biome ci .
 
   test:
     runs-on: ubuntu-latest
