@@ -8,14 +8,14 @@
 		"start": "wrangler dev"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.8.3",
-		"@cloudflare/workers-types": "^4.20240620.0",
-		"typescript": "^5.5.2",
-		"vitest": "^1.6.0",
-		"wrangler": "^3.62.0"
+		"@biomejs/biome": "^1.9.2",
+		"@cloudflare/workers-types": "^4.20240925.0",
+		"typescript": "^5.6.2",
+		"vitest": "^2.1.1",
+		"wrangler": "^3.78.12"
 	},
 	"dependencies": {
-		"fast-xml-parser": "^4.4.0",
-		"hono": "^4.4.10"
+		"fast-xml-parser": "^4.5.0",
+		"hono": "^4.6.3"
 	}
 }
