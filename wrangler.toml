@@ -1,6 +1,6 @@
 name = "book-launch-notifier"
 main = "src/index.ts"
-compatibility_date = "2023-11-21"
+compatibility_date = "2024-12-24"
 
 workers_dev = false
 
@@ -15,6 +15,9 @@ tail_consumers = [
 services = [
   { binding = "FETCHER", service = "book-launch-notifier"}
 ]
+
+[observability]
+enabled = true
 
 [[queues.producers]]
 queue = "slackqueue"
