@@ -147,7 +147,7 @@ type Env = {
 
 export default {
 	...app,
-	async scheduled(controller: ScheduledController, env: Env): Promise<void> {
+	async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
 		await notifyNewBook(env);
 		await notifySoonBook(env);
 	},
