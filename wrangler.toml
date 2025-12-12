@@ -8,10 +8,6 @@ kv_namespaces = [
     { binding = "BOOK_LAUNCH", id = "6c6c2407e70d40c3946e67bea876d22a" }
 ]
 
-tail_consumers = [
-  {service = "cf-tail-logger"},
-]
-
 services = [
   { binding = "FETCHER", service = "book-launch-notifier"}
 ]
