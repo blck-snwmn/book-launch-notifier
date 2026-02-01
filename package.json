@@ -12,7 +12,7 @@
 		"@cloudflare/workers-types": "4.20260111.0",
 		"typescript": "5.9.3",
 		"vitest": "3.2.4",
-		"wrangler": "4.59.1"
+		"wrangler": "4.59.3"
 	},
 	"dependencies": {
 		"fast-xml-parser": "^5.2.5",
