@@ -92,14 +92,7 @@ app.get("/items", async (c) => {
 	const now = new Date();
 
 	// hh:mm:ss -> 00:00:00
-	const startDate = new Date(
-		now.getFullYear(),
-		now.getMonth(),
-		now.getDate(),
-		0,
-		0,
-		0,
-	);
+	const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
 	startDate.setDate(startDate.getDate() + offset);
 	// after 1 day
 	const endDate = new Date(
@@ -195,11 +188,7 @@ async function notifySoonBook(env: Env) {
 	await env.DQUEUE.send(discordMsg);
 }
 
-export function createSlackMessage(
-	channel: string,
-	title: string,
-	items: XMLItem[],
-) {
+export function createSlackMessage(channel: string, title: string, items: XMLItem[]) {
 	const blocks = [];
 	for (const item of items) {
 		const date = new Date(item.date);

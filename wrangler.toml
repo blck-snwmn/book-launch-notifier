@@ -4,13 +4,9 @@ compatibility_date = "2024-12-24"
 
 workers_dev = false
 
-kv_namespaces = [
-    { binding = "BOOK_LAUNCH", id = "6c6c2407e70d40c3946e67bea876d22a" }
-]
+kv_namespaces = [{ binding = "BOOK_LAUNCH", id = "6c6c2407e70d40c3946e67bea876d22a" }]
 
-services = [
-  { binding = "FETCHER", service = "book-launch-notifier"}
-]
+services = [{ binding = "FETCHER", service = "book-launch-notifier" }]
 
 [observability]
 enabled = true
@@ -20,7 +16,7 @@ queue = "slackqueue"
 binding = "SLACK_NOTIFIER"
 
 [triggers]
-crons = [ "0 15 * * *"]
+crons = ["0 15 * * *"]
 
 [[queues.producers]]
 queue = "discordqueue"

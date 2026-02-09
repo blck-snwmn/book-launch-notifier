@@ -11,11 +11,7 @@ describe("createMessage", () => {
 				expiration: 1,
 			},
 		];
-		const result = createSlackMessage(
-			"channelID",
-			"Message Title",
-			inputXMLItems,
-		);
+		const result = createSlackMessage("channelID", "Message Title", inputXMLItems);
 		expect(result).toEqual({
 			type: "chat.postMessage",
 			body: {
