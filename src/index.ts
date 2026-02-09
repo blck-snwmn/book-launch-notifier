@@ -139,6 +139,7 @@ type Env = {
 };
 
 export default {
+	// oxlint-disable-next-line typescript/no-misused-spread
 	...app,
 	async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
 		await notifyNewBook(env);
