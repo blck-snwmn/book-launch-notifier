@@ -13,7 +13,7 @@ importers:
         version: 5.3.8
       hono:
         specifier: ^4.9.4
-        version: 4.11.10
+        version: 4.12.4
     devDependencies:
       '@biomejs/biome':
         specifier: 2.3.15
@@ -864,8 +864,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  hono@4.11.10:
-    resolution: {integrity: sha512-kyWP5PAiMooEvGrA9jcD3IXF7ATu8+o7B3KCbPXid5se52NPqnOpM/r9qeW2heMnOekF4kqR1fXJqCYeCLKrZg==}
+  hono@4.12.4:
+    resolution: {integrity: sha512-ooiZW1Xy8rQ4oELQ++otI2T9DsKpV0M6c6cO6JGx4RTfav9poFFLlet9UMXHZnoM1yG0HWGlQLswBGX3RZmHtg==}
     engines: {node: '>=16.9.0'}
 
   js-tokens@9.0.1:
@@ -1666,7 +1666,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  hono@4.11.10: {}
+  hono@4.12.4: {}
 
   js-tokens@9.0.1: {}
 
