@@ -5,7 +5,7 @@
 		"jsx": "react",
 		"module": "es2022",
 		"moduleResolution": "Bundler",
-		"types": ["@cloudflare/workers-types", "@cloudflare/vitest-pool-workers"],
+		"types": ["@cloudflare/workers-types"],
 		"resolveJsonModule": true,
 		"allowJs": true,
 		"checkJs": false,
