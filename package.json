@@ -5,11 +5,17 @@
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
-		"start": "wrangler dev"
+		"start": "wrangler dev",
+		"lint": "oxlint --deny-warnings .",
+		"lint:fix": "oxlint --deny-warnings . --fix",
+		"fmt": "oxfmt --write src/",
+		"fmt:check": "oxfmt --check src/"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.3.15",
 		"@cloudflare/workers-types": "4.20260412.1",
+		"oxfmt": "^0.48.0",
+		"oxlint": "^1.63.0",
+		"oxlint-tsgolint": "^0.22.1",
 		"typescript": "5.9.3",
 		"vitest": "3.2.4",
 		"wrangler": "4.59.3"
