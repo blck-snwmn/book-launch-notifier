@@ -13,7 +13,7 @@ jobs:
           persist-credentials: false
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
         with:
-          version: 10
+          version: 11
           run_install: true
       - name: Lint
         run: |
@@ -27,7 +27,7 @@ jobs:
           persist-credentials: false
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
         with:
-          version: 10
+          version: 11
           run_install: true
       - name: Format check
         run: |
@@ -41,7 +41,7 @@ jobs:
           persist-credentials: false
       - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
         with:
-          version: 10
+          version: 11
           run_install: true
       - name: Test
         run: |
