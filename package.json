@@ -2,7 +2,7 @@
 	"name": "book-launch-notifier",
 	"version": "0.0.0",
 	"private": true,
-	"packageManager": "pnpm@10",
+	"packageManager": "pnpm@11",
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
