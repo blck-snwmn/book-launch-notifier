@@ -13,7 +13,7 @@ importers:
         version: 5.9.3
       hono:
         specifier: ^4.9.4
-        version: 4.12.26
+        version: 4.12.27
     devDependencies:
       '@cloudflare/workers-types':
         specifier: 4.20260620.1
@@ -1104,8 +1104,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  hono@4.12.26:
-    resolution: {integrity: sha512-uyZtpnYxM9CmQ7QsQknM4zN8EftNqhON1qYeIKM0Se67CCEe2c44xyGURwB0axX2fBDu1dqHrHAc1hmNT8ITkw==}
+  hono@4.12.27:
+    resolution: {integrity: sha512-1yrb/+w6HWQJrUCLkJ2IF5jNIPvvFkblV5RNOYl6bV+OA6p9GLcMpHFFGTosSvHvcAUibuUukRqhlYI4z32C7Q==}
     engines: {node: '>=16.9.0'}
 
   is-unsafe@1.0.1:
@@ -1123,8 +1123,8 @@ packages:
     engines: {node: '>=22.0.0'}
     hasBin: true
 
-  nanoid@3.3.14:
-    resolution: {integrity: sha512-U9kYi5bpVMEI31yC8iw4bJJp0avcHXA0W8/wNfLfnvJYzihQo2ZRPYPvpAAd570HAcCBjCTN7vnr+v4StKl1IQ==}
+  nanoid@3.3.15:
+    resolution: {integrity: sha512-y7Wygv/7mEOvxTuEQDB8StXdMRBWf1kR/tlhAzBRUFkB2jfcLOAxO/SHmOO2zgz1pVgK29/kyupn059/bCHdjA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -2047,7 +2047,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  hono@4.12.26: {}
+  hono@4.12.27: {}
 
   is-unsafe@1.0.1: {}
 
@@ -2069,7 +2069,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  nanoid@3.3.14: {}
+  nanoid@3.3.15: {}
 
   obug@2.1.1: {}
 
@@ -2141,7 +2141,7 @@ snapshots:
 
   postcss@8.5.15:
     dependencies:
-      nanoid: 3.3.14
+      nanoid: 3.3.15
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
