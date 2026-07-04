@@ -13,7 +13,7 @@
 		"fmt:check": "oxfmt --check src/"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "4.20260629.1",
+		"@cloudflare/workers-types": "4.20260701.1",
 		"oxfmt": "0.56.0",
 		"oxlint": "1.71.0",
 		"oxlint-tsgolint": "0.24.0",
