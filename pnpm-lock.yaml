@@ -15,9 +15,6 @@ importers:
         specifier: ^4.9.4
         version: 4.12.25
     devDependencies:
-      '@cloudflare/workers-types':
-        specifier: 4.20260611.1
-        version: 4.20260611.1
       oxfmt:
         specifier: 0.54.0
         version: 0.54.0
@@ -1395,7 +1392,8 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20260609.1':
     optional: true
 
-  '@cloudflare/workers-types@4.20260611.1': {}
+  '@cloudflare/workers-types@4.20260611.1':
+    optional: true
 
   '@cspotcode/source-map-support@0.8.1':
     dependencies:

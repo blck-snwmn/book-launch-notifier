@@ -1,9 +1,8 @@
 import { XMLParser } from "fast-xml-parser";
 import { Hono } from "hono";
 
-export type Bindings = {
+export type Bindings = Env & {
 	URL: string;
-	BOOK_LAUNCH: KVNamespace;
 };
 
 type XMLContemt = {
@@ -131,22 +130,19 @@ app.get("/items", async (c) => {
 	);
 });
 
-type Env = {
+type ScheduledEnv = Env & {
 	CHANNEL: string;
-	FETCHER: Fetcher;
-	SLACK_NOTIFIER: Queue;
-	DQUEUE: Queue;
 };
 
 export default {
 	fetch: app.fetch,
-	async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
+	async scheduled(_controller: ScheduledController, env: ScheduledEnv): Promise<void> {
 		await notifyNewBook(env);
 		await notifySoonBook(env);
 	},
 };
 
-async function notifyNewBook(env: Env) {
+async function notifyNewBook(env: ScheduledEnv) {
 	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items", {
 		method: "POST",
 	});
@@ -168,7 +164,7 @@ async function notifyNewBook(env: Env) {
 	await env.DQUEUE.send(discordMsg);
 }
 
-async function notifySoonBook(env: Env) {
+async function notifySoonBook(env: ScheduledEnv) {
 	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items");
 	if (!newItemsResp.ok) {
 		console.error("failed to post items", newItemsResp.status);

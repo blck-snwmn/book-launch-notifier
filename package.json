@@ -7,13 +7,13 @@
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
+		"cf-typegen": "wrangler types",
 		"lint": "oxlint --deny-warnings .",
 		"lint:fix": "oxlint --deny-warnings . --fix",
 		"fmt": "oxfmt --write src/",
 		"fmt:check": "oxfmt --check src/"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "4.20260611.1",
 		"oxfmt": "0.54.0",
 		"oxlint": "1.69.0",
 		"oxlint-tsgolint": "0.23.0",
