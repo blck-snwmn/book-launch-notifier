@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { createSlackMessage } from ".";
+import { createDiscordMessage } from ".";
 
-describe("createMessage", () => {
+describe("createDiscordMessage", () => {
 	it("should return a message", () => {
 		const inputXMLItems = [
 			{
@@ -11,30 +11,11 @@ describe("createMessage", () => {
 				expiration: 1,
 			},
 		];
-		const result = createSlackMessage("channelID", "Message Title", inputXMLItems);
+		const result = createDiscordMessage("Message Title", inputXMLItems);
 		expect(result).toEqual({
-			type: "chat.postMessage",
-			body: {
-				channel: "channelID",
-				blocks: [
-					{
-						type: "header",
-						text: {
-							type: "plain_text",
-							text: "Message Title",
-						},
-					},
-					{
-						type: "divider",
-					},
-					{
-						type: "section",
-						text: {
-							type: "mrkdwn",
-							text: "*title1*\n2023/9/20\nlink1",
-						},
-					},
-				],
+			type: "send_message",
+			message: {
+				content: "# Message Title\n## title1\n2023/9/20\nlink1\n",
 			},
 		});
 	});
