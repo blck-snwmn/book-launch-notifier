@@ -130,19 +130,15 @@ app.get("/items", async (c) => {
 	);
 });
 
-type ScheduledEnv = Env & {
-	CHANNEL: string;
-};
-
 export default {
 	fetch: app.fetch,
-	async scheduled(_controller: ScheduledController, env: ScheduledEnv): Promise<void> {
+	async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
 		await notifyNewBook(env);
 		await notifySoonBook(env);
 	},
 };
 
-async function notifyNewBook(env: ScheduledEnv) {
+async function notifyNewBook(env: Env) {
 	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items", {
 		method: "POST",
 	});
@@ -157,14 +153,11 @@ async function notifyNewBook(env: ScheduledEnv) {
 	}
 	console.info(`new items: ${newItems.length}`);
 
-	const msg = createSlackMessage(env.CHANNEL, "New Books", newItems);
-	await env.SLACK_NOTIFIER.send(msg);
-
 	const discordMsg = createDiscordMessage("New Books", newItems);
 	await env.DQUEUE.send(discordMsg);
 }
 
-async function notifySoonBook(env: ScheduledEnv) {
+async function notifySoonBook(env: Env) {
 	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items");
 	if (!newItemsResp.ok) {
 		console.error("failed to post items", newItemsResp.status);
@@ -177,47 +170,8 @@ async function notifySoonBook(env: ScheduledEnv) {
 	}
 	console.info(`soon items: ${soonItems.items.length}`);
 
-	const msg = createSlackMessage(env.CHANNEL, "Soon Books", soonItems.items);
-	await env.SLACK_NOTIFIER.send(msg);
-
 	const discordMsg = createDiscordMessage("Soon Books", soonItems.items);
 	await env.DQUEUE.send(discordMsg);
-}
-
-export function createSlackMessage(channel: string, title: string, items: XMLItem[]) {
-	const blocks = [];
-	for (const item of items) {
-		const date = new Date(item.date);
-		const dateStr = date.toLocaleDateString("ja-JP", {
-			timeZone: "Asia/Tokyo",
-		});
-		blocks.push({
-			type: "section",
-			text: {
-				type: "mrkdwn",
-				text: `*${item.title}*\n${dateStr}\n${item.link}`,
-			},
-		});
-	}
-	return {
-		type: "chat.postMessage",
-		body: {
-			channel: channel,
-			blocks: [
-				{
-					type: "header",
-					text: {
-						type: "plain_text",
-						text: title,
-					},
-				},
-				{
-					type: "divider",
-				},
-				...blocks,
-			],
-		},
-	};
 }
 
 export function createDiscordMessage(title: string, items: XMLItem[]) {
