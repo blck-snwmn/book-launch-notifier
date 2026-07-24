@@ -9,10 +9,10 @@ importers:
   .:
     dependencies:
       fast-xml-parser:
-        specifier: ^5.2.5
+        specifier: 5.10.1
         version: 5.10.1
       hono:
-        specifier: ^4.9.4
+        specifier: 4.12.31
         version: 4.12.31
     devDependencies:
       oxfmt:
