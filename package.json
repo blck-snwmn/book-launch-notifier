@@ -22,7 +22,7 @@
 		"wrangler": "4.112.0"
 	},
 	"dependencies": {
-		"fast-xml-parser": "^5.2.5",
-		"hono": "^4.9.4"
+		"fast-xml-parser": "5.10.1",
+		"hono": "4.12.31"
 	}
 }
