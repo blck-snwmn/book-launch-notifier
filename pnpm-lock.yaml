@@ -12,8 +12,8 @@ importers:
         specifier: 5.10.1
         version: 5.10.1
       hono:
-        specifier: 4.13.1
-        version: 4.13.1
+        specifier: 4.13.2
+        version: 4.13.2
     devDependencies:
       oxfmt:
         specifier: 0.63.0
@@ -1227,8 +1227,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  hono@4.13.1:
-    resolution: {integrity: sha512-kdJoFVv2xmayw6cY09H7AbMJMt8Jn5jdlEdXsP7AGBdF2DIptVlKlOLKXP41yPip4/a3yQPv9gVcJYI8YY04dw==}
+  hono@4.13.2:
+    resolution: {integrity: sha512-JydRilDRkYBQMt9qR9U92mXxmbGqsqSn/IKOrh4e7/gEbn+0zSr8igTu0obwJoNGN4sez28DIql7FBHWydoJpA==}
     engines: {node: '>=16.9.0'}
 
   is-unsafe@2.0.0:
@@ -2237,7 +2237,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  hono@4.13.1: {}
+  hono@4.13.2: {}
 
   is-unsafe@2.0.0: {}
 
