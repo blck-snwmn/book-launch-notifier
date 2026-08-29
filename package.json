@@ -23,6 +23,6 @@
 	},
 	"dependencies": {
 		"fast-xml-parser": "5.11.0",
-		"hono": "4.13.4"
+		"hono": "4.13.5"
 	}
 }
