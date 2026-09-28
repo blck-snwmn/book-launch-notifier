@@ -18,7 +18,7 @@
 		"oxlint": "1.85.0",
 		"oxlint-tsgolint": "7.0.2003",
 		"typescript": "7.0.2",
-		"vitest": "5.0.1",
+		"vitest": "5.0.2",
 		"wrangler": "4.137.0"
 	},
 	"dependencies": {
