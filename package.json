@@ -4,16 +4,17 @@
 	"private": true,
 	"packageManager": "pnpm@12.8.1",
 	"scripts": {
-		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
-		"start": "wrangler dev",
-		"cf-typegen": "wrangler types",
+		"deploy": "cf deploy --mode production",
+		"dev": "cf dev",
+		"start": "cf dev",
+		"cf-typegen": "cf workers types",
 		"lint": "oxlint --deny-warnings .",
 		"lint:fix": "oxlint --deny-warnings . --fix",
 		"fmt": "oxfmt --write src/",
 		"fmt:check": "oxfmt --check src/"
 	},
 	"devDependencies": {
+		"cf": "1.0.0-beta.12",
 		"oxfmt": "0.71.0",
 		"oxlint": "1.86.0",
 		"oxlint-tsgolint": "7.0.2003",
@@ -24,5 +25,6 @@
 	"dependencies": {
 		"fast-xml-parser": "5.11.2",
 		"hono": "4.13.11"
-	}
+	},
+	"type": "module"
 }

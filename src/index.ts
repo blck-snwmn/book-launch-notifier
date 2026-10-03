@@ -1,7 +1,7 @@
 import { XMLParser } from "fast-xml-parser";
 import { Hono } from "hono";
 
-export type Bindings = Env & {
+export type Bindings = Cloudflare.Env & {
 	URL: string;
 };
 
@@ -132,13 +132,13 @@ app.get("/items", async (c) => {
 
 export default {
 	fetch: app.fetch,
-	async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
+	async scheduled(_controller: ScheduledController, env: Cloudflare.Env): Promise<void> {
 		await notifyNewBook(env);
 		await notifySoonBook(env);
 	},
 };
 
-async function notifyNewBook(env: Env) {
+async function notifyNewBook(env: Cloudflare.Env) {
 	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items", {
 		method: "POST",
 	});
@@ -157,7 +157,7 @@ async function notifyNewBook(env: Env) {
 	await env.DQUEUE.send(discordMsg);
 }
 
-async function notifySoonBook(env: Env) {
+async function notifySoonBook(env: Cloudflare.Env) {
 	const newItemsResp = await env.FETCHER.fetch("http://localhost:8787/items");
 	if (!newItemsResp.ok) {
 		console.error("failed to post items", newItemsResp.status);
