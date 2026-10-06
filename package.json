@@ -2,7 +2,7 @@
 	"name": "book-launch-notifier",
 	"version": "0.0.0",
 	"private": true,
-	"packageManager": "pnpm@12.8.2",
+	"packageManager": "pnpm@12.9.0",
 	"scripts": {
 		"deploy": "cf deploy --mode production",
 		"dev": "cf dev",
