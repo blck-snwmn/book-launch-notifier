@@ -15,7 +15,7 @@
 	},
 	"devDependencies": {
 		"cf": "1.0.0-beta.12",
-		"oxfmt": "0.71.0",
+		"oxfmt": "0.72.0",
 		"oxlint": "1.87.0",
 		"oxlint-tsgolint": "7.0.2003",
 		"typescript": "7.0.2",
