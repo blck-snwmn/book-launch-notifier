@@ -23,7 +23,7 @@
 		"wrangler": "4.152.0"
 	},
 	"dependencies": {
-		"fast-xml-parser": "5.11.2",
+		"fast-xml-parser": "5.12.0",
 		"hono": "4.13.16"
 	},
 	"type": "module"
