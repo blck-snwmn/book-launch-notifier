@@ -14,7 +14,7 @@
 		"fmt:check": "oxfmt --check src/"
 	},
 	"devDependencies": {
-		"cf": "1.0.0-beta.32",
+		"cf": "1.0.0-rc.0",
 		"oxfmt": "0.78.0",
 		"oxlint": "1.93.0",
 		"oxlint-tsgolint": "7.0.2007",
