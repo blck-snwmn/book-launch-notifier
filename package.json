@@ -17,7 +17,7 @@
 		"cf": "1.0.0-rc.2",
 		"oxfmt": "0.79.0",
 		"oxlint": "1.94.0",
-		"oxlint-tsgolint": "7.0.2007",
+		"oxlint-tsgolint": "7.0.2008",
 		"typescript": "7.0.2",
 		"vitest": "5.0.5",
 		"wrangler": "4.152.0"
